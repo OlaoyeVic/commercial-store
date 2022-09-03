@@ -18,7 +18,7 @@ export const getStaticProps = async () => {
 
 export default function Home(props) {
   return (
-    <Grid gridTemplateColumns="repeat(4, 1fr)" gap="5r">
+    <Grid gridTemplateColumns="repeat(4, 1fr)" gap="5">
       {props.products.map((product) => (
         <ProductCard key={product.id} {...product} />
       ))}

@@ -1,14 +1,21 @@
 import '../styles/globals.css'
-import { ChakraProvider, Flex } from '@chakra-ui/react'
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
+import Navbar from '../components/Navbar'
+import CartContext from '../lib/context/Cart'
+import { useState } from 'react/cjs/react.production.min'
 
 function MyApp({ Component, pageProps }) {
+  const [items, setItems] = useState({})
   return (
     <ChakraProvider>
-      <Flex w="full" minH="100vh" bgColor="gray.100">
-        <Box maxW="70vw" m="auto">
-          <Component {...pageProps} />
-        </Box>
-      </Flex>
+      <CartContext.Provider value={{items, setItems}}>
+        <Flex w="full" minH="100vh" bgColor="gray.100">
+          <Navbar />
+          <Box maxW="70vw" m="auto">
+            <Component {...pageProps} />
+          </Box>
+        </Flex>
+      </CartContext.Provider>
     </ChakraProvider>
   )
 }

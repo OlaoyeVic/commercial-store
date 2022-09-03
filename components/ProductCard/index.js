@@ -1,7 +1,7 @@
 import { Box, Divider, Image, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 
-export default ProductCard = (props) => {
+const ProductCard = (props) => {
     return (
         <Link href={`/product/${props.slug}`} passHref>
             <Box 
@@ -29,3 +29,4 @@ export default ProductCard = (props) => {
         </Link>
     )
 }
+export default ProductCard
