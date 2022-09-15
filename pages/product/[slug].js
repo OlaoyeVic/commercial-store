@@ -3,6 +3,7 @@ import graphql from "../../lib/graphql"
 import getAllProducts from "../../lib/graphql/queries/getAllProducts"
 import getProductDetails from "../../lib/graphql/queries/getProductDetails"
 import { useState, useContext } from 'react'
+import CartContext from "../../lib/context/Cart"
 
 export const getStaticPaths = async() => {
     const { products } = await graphql.request(getAllProducts)
@@ -34,7 +35,7 @@ export const getStaticProps = async({ params }) => {
 const SelectQuantity = (props) => {
     const quantity = [...Array.from({ length: 10 })]
     return (
-        <Select placeholder="Quantity" onChange={(event) => props.onChange(event.target.value)}>
+        <Select placeholder='Quantity' borderColor='blue' onChange={(event) => props.onChange(event.target.value)}>
             {quantity.map((_, i) => (
                 <option key={i+1} value={i+1}>
                     {i+1}
@@ -45,8 +46,8 @@ const SelectQuantity = (props) => {
 }
 
 const ProductPage = ({ product }) => {
-    const [quantity, setQuantity] = useState()
-    const { items, setItems } = useContext()
+    const [quantity, setQuantity] = useState(0)
+    const { items, setItems } = useContext(CartContext)
 
     const alreadyInCart = product.id in items
 

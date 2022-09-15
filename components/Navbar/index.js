@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Flex, Box, Button, Text } from '@chakra-ui/react'
-import { MdShoppingCart } from 'react-icons/md'
+import { MdShoppingCart } from "react-icons/md";
 import { useState, useContext } from 'react'
 import CartContext from "../../lib/context/Cart";
 
@@ -10,6 +10,9 @@ const Navbar = () => {
     const itemsCount = Object
         .values(items)
         .reduce((x, y) => x+y, 0)
+
+    console.log(itemsCount)
+
     return (
         <Box position="fixed" top={0} left={0} w="full" bgColor="white" boxShadow="md">
             <Flex width="container.xl" m="auto" p="5" justifyContent="space-between">
@@ -20,9 +23,9 @@ const Navbar = () => {
                 </Link>
                 <Box>
                     <Link href="/cart" passHref>
-                        <Button as="a">
+                        <Button as="a" colorScheme='blue'>
                             <MdShoppingCart />
-                            <Text ml="3">{itemsCount}</Text>
+                            <Text ml="3" textColor="blue.800">{itemsCount}</Text>
                         </Button>
                     </Link>
                 </Box>
