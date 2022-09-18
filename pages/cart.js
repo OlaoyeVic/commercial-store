@@ -4,8 +4,11 @@ import CartContext from "../lib/context/Cart";
 import graphql from "../lib/graphql";
 import getProductsById from "../lib/graphql/queries/getProductsById";
 import Link from "next/link";
+import { useRouter } from 'next/router'
+import Router from "next/dist/server/router";
 
 const Cart = () => {
+    const router = useRouter()
     const { items } = useContext(CartContext)
     const [products, setProducts] = useState([])
     const hasProducts = Object.keys(items).length
@@ -30,10 +33,17 @@ const Cart = () => {
         return Object.keys(items)
             .map(
                 (id) =>
-                products.find((product) => product.id === id).price*(items[id]/100)
+                products.find((product) => product.id === id).price*(items[id])
             )
             .reduce((x, y) => x+y)
             .toFixed(2)
+    }
+
+    localStorage.setItem('amount', getTotal())
+
+    const handleClick = (event) => {
+        event.preventDefault()
+        router.push('/info')
     }
 
     return (
@@ -67,7 +77,7 @@ const Cart = () => {
                                     </Link>
                                 </Box>
                                 <Box color='blue'>
-                                    €{(items[product.id] * (product.price/100)).toFixed(2)}
+                                    ₦{(items[product.id] * (product.price)).toFixed(2)}
                                 </Box>
                             </Flex>
                         ))}
@@ -77,9 +87,9 @@ const Cart = () => {
                             justifyContent="space-between"
                         >
                             <Text fontSize="xl" fontWeight="bold" color='blue'>
-                                Total: €{getTotal()}
+                                Total: {getTotal()}
                             </Text>
-                            <Button colorScheme="blue">Pay now</Button>
+                            <Button colorScheme="blue" onClick={handleClick}>Pay now</Button>
                         </Flex>
                     </>
                 )}

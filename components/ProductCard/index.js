@@ -23,7 +23,7 @@ const ProductCard = (props) => {
                 <Divider my="3" />
                 <Box>
                     <Text fontWeight="bold" textColor="purple" fontSize="lg">{props.name}</Text>
-                    <Text color="gray.700">€{props.price/100}</Text>
+                    <Text color="gray.700">₦{props.price}</Text>
                 </Box>
             </Box>
         </Link>

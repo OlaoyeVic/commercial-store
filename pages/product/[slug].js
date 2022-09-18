@@ -65,7 +65,7 @@ const ProductPage = ({ product }) => {
                     {product.name}
                 </Text>
                 <Text lineHeight="none" fontSize="xl" my="3" fontWeight="bold" textColor="blue.500">
-                    €{product.price/100}
+                ₦{product.price}
                 </Text>
                 <Text maxW="96" textAlign="justify" fontSize="sm">
                     {product.description}
